@@ -1,27 +1,22 @@
-Python Shop System
-This is a functional shop and inventory system developed on Linux Mint. The project focuses on data structure management and persistent data storage.
+# Simple Python Inventory & Shop System
+A procedural logic-based inventory system built to practice data structures and state management in Python.
 
-Features
-Purchase System: Buy items (Star, Shell, Block) with automatic coin deduction.
+## 🚀 Features
+* **Inventory Control:** Manage a list of items with a strict capacity limit of 5 slots.
+* **Economic Logic:** Dedicated functions for buying and selling items with real-time balance updates.
+* **Basic Persistence:** Ability to export the current session data into a `savegame.json` file.
 
-Sales System: Sell items from the inventory to regain coins.
+## 🛠 Tech Stack
+* **Language:** Python 3.x
+* **Data Storage:** JSON (for state exports)
 
-Inventory Management: Integrated limit of 5 slots per user account.
+## 🕹️ How to Use
+1. **Run the script:** `python your_filename.py`
+2. **Commands:** Follow the prompts to `kaufen` (buy), `verkaufen` (sell), `anzeigen` (show status), or `ausgeben` (save to file).
+3. **Save Game:** If you choose `ausgeben`, your progress is saved to `savegame.json`.
 
-Persistent Storage: Saves account data, including coins and inventory, to a JSON file.
+## 🎯 Learning Progress
+This project was a key milestone in learning how to manage global states and complex conditional logic (`if/elif/else`). It served as the foundation for my later transition into Object-Oriented Programming (OOP), showing my progression from procedural scripts to scalable software architecture.
 
-Technical Details
-Language: Python 3
-
-Data Format: JSON for data persistence.
-
-Development Environment: Linux Mint.
-
-Learning Objectives
-Implementation of functions with parameters.
-
-Handling nested data structures (Dictionaries and Lists).
-
-Input validation and normalization using string methods.
-
-Manual implementation of JSON serialization for saving program states.
+---
+*Coding journey of a 15-year-old dev.*
