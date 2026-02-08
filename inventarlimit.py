@@ -1,75 +1,80 @@
 import json
-Acount = {
-    "Inventar":[],
+Account = {
+    "Inventory": [],
     "Coins": 1000
 }
-def items(auswahl):
-    if len(Acount["Inventar"])< 5:
-        if auswahl == "star":
-            if Acount["Coins"] < 50:
-                print(f"Du hast zu wenig münzen du brauchst noch {50 - Acount['Coins']} Münzen")
-            else:
-                menge = 50
-                Acount["Inventar"].append(auswahl)
-                Acount["Coins"]-=menge
-                print(f"erfolgreich gekauft du hast jetzt {Acount['Coins']} Münzen")
-        elif auswahl == "shell":
-            if Acount["Coins"] < 30:
-                print(f"Du hast zu wenig münzen du brauchst noch {30 - Acount['Coins']} Münzen")
-            else:
-                menge = 30
-                Acount["Inventar"].append(auswahl)
-                Acount["Coins"]-=menge
-                print(f"erfolgreich gekauft du hast jetzt {Acount['Coins']} Münzen")
-        elif auswahl == "block":
-            if Acount["Coins"] < 10:
-                print(f"Du hast zu wenig münzen du brauchst noch {30 - Acount['Coins']} Münzen")
-            else:
-                menge=10
-                Acount["Inventar"].append(auswahl)
-                Acount["Coins"]-=menge
-                print(f"erfolgreich gekauft du hast jetzt {Acount['Coins']} Münzen")
-        else:
-            print("Dieses Item haben wir nicht")
-    elif len(Acount["Inventar"]) == 5:
-        print("Du hast zu schon zu viele items im inventar")
 
-def verkaufen(sale):
-        if sale=="star":
-            if sale in Acount["Inventar"]:
-                Acount["Inventar"].remove(sale)
-                Acount["Coins"]+=40
-                print(f"Dein Star wurde erfolgreich verkauft du hast jetzt {Acount['Coins']} Münzen")
-        elif sale=="shell":
-            if sale in Acount["Inventar"]:
-                Acount["Inventar"].remove(sale)
-                Acount["Coins"]+=20
-                print(f"Deine shell wurde erfolgreich verkauft du hast jetzt {Acount['Coins']} Münzen")
-        elif sale=="block":
-            if sale in Acount["Inventar"]:
-                Acount["Inventar"].remove(sale)
-                Acount["Coins"]+=5
-                print(f"Dein block wurde erfolgreich verkauft du hast jetzt {Acount['Coins']} Münzen")
+def items(selection):
+    if len(Account["Inventory"]) < 5:
+        if selection == "star":
+            if Account["Coins"] < 50:
+                print(f"Not enough coins! You need {50 - Account['Coins']} more.")
+            else:
+                price = 50
+                Account["Inventory"].append(selection)
+                Account["Coins"] -= price
+                print(f"Successfully bought! Current balance: {Account['Coins']} coins.")
+        elif selection == "shell":
+            if Account["Coins"] < 30:
+                print(f"Not enough coins! You need {30 - Account['Coins']} more.")
+            else:
+                price = 30
+                Account["Inventory"].append(selection)
+                Account["Coins"] -= price
+                print(f"Successfully bought! Current balance: {Account['Coins']} coins.")
+        elif selection == "block":
+            if Account["Coins"] < 10:
+                print(f"Not enough coins! You need {10 - Account['Coins']} more.")
+            else:
+                price = 10
+                Account["Inventory"].append(selection)
+                Account["Coins"] -= price
+                print(f"Successfully bought! Current balance: {Account['Coins']} coins.")
         else:
-            print("dieses item hast du nicht")
-while True:
-    print("Was willst du machen machen ein item kaufen, verkaufen, anzeigen")
-    Auswahl=input("oder ausgeben? ").lower()
-    if Auswahl == "kaufen":
-        itemname=input("Welches Item willst du kaufen    star:50  |  shell:30  |  block:10  ").lower()
-        items(itemname)
-    elif Auswahl == "verkaufen":
-        verkauf=input("welches item willst du verkaufen    star:40  |  shell:20  |  block:5  ").lower()
-        verkaufen(verkauf)
-    elif Auswahl == "anzeigen":
-        print(Acount)
-    elif Auswahl=="ausgeben":
-        print(Acount)
-        was=input("wirklich ausgeben j/n " )
-        if was == "j":
-            with open("savegame.json", "w") as datei:
-                json.dump(Acount, datei, )
-        else:
-            print("dann wieder zum anfang")
+            print("Item not in stock.")
+    elif len(Account["Inventory"]) == 5:
+        print("Your inventory is full!")
+
+def sell(item_to_sell):
+    if item_to_sell == "star":
+        if item_to_sell in Account["Inventory"]:
+            Account["Inventory"].remove(item_to_sell)
+            Account["Coins"] += 40
+            print(f"Star sold! Current balance: {Account['Coins']} coins.")
+    elif item_to_sell == "shell":
+        if item_to_sell in Account["Inventory"]:
+            Account["Inventory"].remove(item_to_sell)
+            Account["Coins"] += 20
+            print(f"Shell sold! Current balance: {Account['Coins']} coins.")
+    elif item_to_sell == "block":
+        if item_to_sell in Account["Inventory"]:
+            Account["Inventory"].remove(item_to_sell)
+            Account["Coins"] += 5
+            print(f"Block sold! Current balance: {Account['Coins']} coins.")
     else:
-        print("bitte gebe nur das ein was da steht")
+        print("You don't have this item.")
+
+while True:
+    print("\nActions: buy | sell | status | save")
+    choice = input("What do you want to do? ").lower()
+    
+    if choice == "buy":
+        item_name = input("Which item? (star: 50 | shell: 30 | block: 10): ").lower()
+        items(item_name)
+    elif choice == "sell":
+        item_name = input("Which item? (star: 40 | shell: 20 | block: 5): ").lower()
+        sell(item_name)
+    elif choice == "status":
+        print(Account)
+    elif choice == "save":
+        print(Account)
+        confirm = input("Save game? (y/n): ").lower()
+        if confirm == "y":
+            with open("savegame.json", "w") as file:
+                json.dump(Account, file)
+            print("Game saved successfully!")
+            break
+        else:
+            print("Returning to menu...")
+    else:
+        print("Invalid input. Please choose from the options above.")
